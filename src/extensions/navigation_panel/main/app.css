@@ -1,0 +1,19 @@
+:root {
+  --background: transparent;
+}
+
+html,
+body {
+  width: 392px;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(20);
+    opacity: 0;
+  }
+}

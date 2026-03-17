@@ -1,15 +1,11 @@
 {
-  "name": "reearth-visualizer-plugin-shadcn-template",
+  "name": "reearth-visualizer-plugin-navigation-panel",
   "version": "1.0.0",
   "type": "module",
   "engines": {
     "node": ">=20.11.0"
   },
   "scripts": {
-    "dev:demo:main": "cross-env EXTENSION_NAME=demo UI_NAME=main vite -c configs/ui.ts",
-    "build:demo:main": "cross-env EXTENSION_NAME=demo UI_NAME=main vite build -c configs/ui.ts",
-    "build:demo:extension": "cross-env EXTENSION_NAME=demo vite build -c configs/extension.ts",
-    "build:demo": "run-s build:demo:main build:demo:extension",
     "build": "run-s build:demo zip",
     "preview": "vite preview --port 5005 --strict-port",
     "zip": "node ./scripts/zip.mjs",
@@ -18,7 +14,11 @@
     "lint": "eslint .",
     "fix": "eslint --fix .",
     "format": "prettier --write .",
-    "dev-build": "concurrently 'yarn dev:demo:main' 'yarn build:demo:main --watch' 'yarn build:demo:extension --watch' 'vite preview --port 5005 --strict-port'"
+    "dev-build": "concurrently 'yarn dev:navigation_panel:main' 'yarn build:navigation_panel:main --watch' 'yarn build:navigation_panel:extension --watch' 'vite preview --port 5005 --strict-port'",
+    "dev:navigation_panel:main": "cross-env EXTENSION_NAME=navigation_panel UI_NAME=main vite -c configs/ui.ts",
+    "build:navigation_panel:main": "cross-env EXTENSION_NAME=navigation_panel UI_NAME=main vite build -c configs/ui.ts",
+    "build:navigation_panel:extension": "cross-env EXTENSION_NAME=navigation_panel vite build -c configs/extension.ts",
+    "build:navigation_panel": "run-s build:navigation_panel:main build:navigation_panel:extension"
   },
   "dependencies": {
     "@radix-ui/react-icons": "1.3.2",
