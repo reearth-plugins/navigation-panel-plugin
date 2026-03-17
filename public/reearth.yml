@@ -1,16 +1,51 @@
-id: reearth-visualizer-plugin-shadcn-template
-name: Visualizer plugin shadcn template
-version: 1.0.0
+id: reearth-visualizer-plugin-navigation-panel
+name: Visualizer plugin navigation panel
+version: 0.0.1
 extensions:
-  - id: demo
+  - id: navigation_panel
     type: widget
-    name: Demo
+    name: Navigation Panel
     schema:
       groups:
+        - id: general
+          title: General
+          fields:
+            - id: home
+              title: Home Camera Position
+              type: camera
+              description: Set the default camera position for the home button
         - id: appearance
           title: Appearance
           fields:
-            - id: primary_color
-              title: Primary color
+            - id: background_color
+              title: Background color
               type: string
               ui: color
+            - id: icon_color
+              title: Icon color
+              type: string
+              ui: color
+            - id: corner_radius
+              title: Corner radius
+              type: number
+              unit: px
+            - id: show_border
+              title: Show border
+              type: bool
+              defaultValue: false
+            - id: border_color
+              title: Border color
+              type: string
+              ui: color
+              availableIf:
+                field: show_border
+                type: bool
+                value: true
+            - id: border_width
+              title: Border width
+              type: number
+              unit: px
+              availableIf:
+                field: show_border
+                type: bool
+                value: true
