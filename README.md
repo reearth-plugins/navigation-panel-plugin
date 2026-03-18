@@ -26,6 +26,11 @@ A sleek, intuitive navigation control panel for Re:Earth Visualizer that provide
 - **Ripple Animation**: Material Design-style ripple effect provides instant visual feedback on button clicks
 - **Smooth Transitions**: All camera movements use smooth animations (0.4s duration) for a polished experience
 
+### Customizable Interface
+
+- **Adaptive Sizing**: Three preset sizes (small, medium, large) with proportionally scaled icons, padding, and spacing
+- **Theme Customization**: Full control over colors, borders, and corner radius to match your application design
+
 ## Customization Options
 
 Configure the plugin's appearance through the Re:Earth widget settings:
@@ -36,6 +41,11 @@ Configure the plugin's appearance through the Re:Earth widget settings:
 
 ### Appearance Settings
 
+- **Size**: Choose from three preset sizes to fit your screen layout
+  - **Small**: Compact 252px total width (160×160px navigation, 84×160px zoom)
+  - **Medium** (default): Balanced 316px total width (200×200px navigation, 104×200px zoom)
+  - **Large**: Prominent 392px total width (248×248px navigation, 128×248px zoom)
+  - Icons, padding, and spacing scale proportionally with each size
 - **Background Color**: Customize the panel background color
 - **Icon Color**: Change the color of navigation and zoom icons
 - **Corner Radius**: Adjust the roundness of panel corners
@@ -65,9 +75,10 @@ This makes the controls intuitive regardless of your camera angle, perfect for e
 
 1. Add the Navigation Panel widget to your Re:Earth visualizer
 2. Position it where you want on your screen
-3. Configure your home camera position and appearance preferences
-4. Click the directional arrows to navigate, use zoom controls to adjust altitude
-5. Click the home button to return to your starting position
+3. Choose your preferred size (small, medium, or large) to fit your layout
+4. Configure your home camera position and appearance preferences (colors, borders, etc.)
+5. Click the directional arrows to navigate, use zoom controls to adjust altitude
+6. Click the home button to return to your starting position
 
 ## Technical Details
 
