@@ -6,6 +6,10 @@ import {
   DEFAULT_PANEL_BORDER_WIDTH,
   DEFAULT_PANEL_CORNER_RADIUS,
   DEFAULT_ICON_COLOR,
+  SIZE_CONFIGS,
+  DEFAULT_UI_ANIMATION_DURATION,
+  RIPPLE_ANIMATION_DURATION,
+  type SizeConfig,
 } from "./constants";
 
 import { postMsg } from "@/shared/utils"; // ms - ripple animation duration
@@ -31,6 +35,7 @@ type RippleState = {
 
 type WidgetProperty = {
   appearance?: {
+    size?: "small" | "medium" | "large";
     background_color?: string;
     icon_color?: string;
     corner_radius?: number;
@@ -39,9 +44,6 @@ type WidgetProperty = {
     border_width?: number;
   };
 };
-
-const DEFAULT_DURATION = 300; // ms - match animation duration
-const RIPPLE_DURATION = 600;
 
 export default () => {
   const [property, setProperty] = useState<WidgetProperty>({});
@@ -67,6 +69,21 @@ export default () => {
     };
   }, [property.appearance]);
 
+  const sizeConfig: SizeConfig = useMemo(() => {
+    const size = property.appearance?.size || "medium";
+    return SIZE_CONFIGS[size];
+  }, [property.appearance?.size]);
+
+  const totalWidth = useMemo(() => {
+    return `${sizeConfig.navPanelWidth + sizeConfig.zoomPanelWidth + sizeConfig.panelGap}px`;
+  }, [sizeConfig]);
+
+  // Update html and body width based on size
+  useEffect(() => {
+    document.documentElement.style.width = totalWidth;
+    document.body.style.width = totalWidth;
+  }, [totalWidth]);
+
   const [isDisabled, setIsDisabled] = useState(false);
   const [ripple, setRipple] = useState<RippleState>(null);
 
@@ -81,12 +98,12 @@ export default () => {
       // Re-enable buttons after animation completes
       setTimeout(() => {
         setIsDisabled(false);
-      }, DEFAULT_DURATION);
+      }, DEFAULT_UI_ANIMATION_DURATION);
 
       // Remove ripple after animation completes
       setTimeout(() => {
         setRipple(null);
-      }, RIPPLE_DURATION);
+      }, RIPPLE_ANIMATION_DURATION);
     },
     [isDisabled],
   );
@@ -117,5 +134,6 @@ export default () => {
     ripple,
     panelStyle,
     iconStyle,
+    sizeConfig,
   };
 };

@@ -1,6 +1,7 @@
 import html_main from "@distui/navigation_panel/main/index.html?raw";
 import { Camera } from "@reearth/core";
 
+import { DEFAULT_CAMERA_ANIMATION_DURATION } from "./main/constants";
 import { GlobalThis } from "@/shared/reearthTypes";
 
 type WidgetProperty = {
@@ -8,6 +9,7 @@ type WidgetProperty = {
     home?: Camera;
   };
   appearance?: {
+    size?: "small" | "medium" | "large";
     background_color?: string;
     icon_color?: string;
     corner_radius?: number;
@@ -19,9 +21,6 @@ type WidgetProperty = {
 
 const reearth = (globalThis as unknown as GlobalThis).reearth;
 reearth.ui.show(html_main);
-
-// Animation duration constant
-const DEFAULT_DURATION = 0.4; // seconds
 
 // Configuration with defaults
 const getConfig = () => {
@@ -37,7 +36,7 @@ const getConfig = () => {
 let targetLat: number | null = null;
 let targetLng: number | null = null;
 let lastMoveTime = 0;
-const RESET_TIMEOUT = DEFAULT_DURATION * 1000 * 2; // ms - reset target after 2x animation duration
+const RESET_TIMEOUT = DEFAULT_CAMERA_ANIMATION_DURATION * 1000 * 2; // ms - reset target after 2x animation duration
 
 // Normalize longitude to -180 to +180 range
 const normalizeLng = (lng: number): number => {
@@ -127,7 +126,7 @@ const moveCamera = (direction: "forward" | "backward" | "left" | "right") => {
       roll: current.roll,
     },
     {
-      duration: DEFAULT_DURATION,
+      duration: DEFAULT_CAMERA_ANIMATION_DURATION,
     },
   );
 };
@@ -162,7 +161,7 @@ reearth.extension.on("message", (message: unknown) => {
       // Fly to home position
       if (config.home) {
         reearth.camera.flyTo(config.home, {
-          duration: DEFAULT_DURATION,
+          duration: DEFAULT_CAMERA_ANIMATION_DURATION,
         });
       }
       break;
@@ -181,7 +180,7 @@ reearth.extension.on("message", (message: unknown) => {
             roll: currentPos.roll,
           },
           {
-            duration: DEFAULT_DURATION,
+            duration: DEFAULT_CAMERA_ANIMATION_DURATION,
           },
         );
       }
@@ -202,7 +201,7 @@ reearth.extension.on("message", (message: unknown) => {
             roll: currentPos.roll,
           },
           {
-            duration: DEFAULT_DURATION,
+            duration: DEFAULT_CAMERA_ANIMATION_DURATION,
           },
         );
       }
