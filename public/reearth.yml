@@ -17,6 +17,17 @@ extensions:
         - id: appearance
           title: Appearance
           fields:
+            - id: size
+              title: Size
+              type: string
+              defaultValue: medium
+              choices:
+                - key: small
+                  label: Small
+                - key: medium
+                  label: Medium
+                - key: large
+                  label: Large
             - id: background_color
               title: Background color
               type: string

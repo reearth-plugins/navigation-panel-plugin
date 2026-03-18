@@ -2,11 +2,6 @@
   --background: transparent;
 }
 
-html,
-body {
-  width: 392px;
-}
-
 @keyframes ripple {
   0% {
     transform: scale(0);

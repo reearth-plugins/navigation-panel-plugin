@@ -13,8 +13,14 @@ import useHooks from "./hooks";
 import { Button } from "@/shared/components/ui/button";
 
 function App() {
-  const { handleAction, isDisabled, ripple, panelStyle, iconStyle } =
-    useHooks();
+  const {
+    handleAction,
+    isDisabled,
+    ripple,
+    panelStyle,
+    iconStyle,
+    sizeConfig,
+  } = useHooks();
 
   const renderRipple = (action: string) => {
     if (!ripple || ripple.action !== action) return null;
@@ -30,13 +36,21 @@ function App() {
   };
 
   return (
-    <div className="flex gap-4">
+    <div className="flex" style={{ gap: `${sizeConfig.panelGap}px` }}>
       {/* Navigation Control Panel */}
       <div
-        className="bg-zinc-900/60 backdrop-blur-sm rounded-2xl p-5 w-[248px] h-[248px]"
-        style={panelStyle}
+        className="bg-zinc-900/60 backdrop-blur-sm rounded-2xl"
+        style={{
+          ...panelStyle,
+          width: `${sizeConfig.navPanelWidth}px`,
+          height: `${sizeConfig.navPanelHeight}px`,
+          padding: `${sizeConfig.padding}px`,
+        }}
       >
-        <div className="grid grid-cols-3 grid-rows-3 gap-2 h-full w-full">
+        <div
+          className="grid grid-cols-3 grid-rows-3 h-full w-full"
+          style={{ gap: `${sizeConfig.gap}px` }}
+        >
           {/* Top row - Up arrow centered */}
           <div className="col-start-2">
             <Button
@@ -47,7 +61,10 @@ function App() {
               disabled={isDisabled}
             >
               {renderRipple("up")}
-              <ArrowUp className={`size-8 relative z-10`} style={iconStyle} />
+              <ArrowUp
+                className="relative z-10"
+                style={{ ...iconStyle, width: sizeConfig.navIconSize, height: sizeConfig.navIconSize }}
+              />
             </Button>
           </div>
 
@@ -61,7 +78,10 @@ function App() {
               disabled={isDisabled}
             >
               {renderRipple("left")}
-              <ArrowLeft className="size-8 relative z-10" style={iconStyle} />
+              <ArrowLeft
+                className="relative z-10"
+                style={{ ...iconStyle, width: sizeConfig.navIconSize, height: sizeConfig.navIconSize }}
+              />
             </Button>
           </div>
           <div className="col-start-2 row-start-2">
@@ -73,7 +93,10 @@ function App() {
               disabled={isDisabled}
             >
               {renderRipple("home")}
-              <Home className="size-8 relative z-10" style={iconStyle} />
+              <Home
+                className="relative z-10"
+                style={{ ...iconStyle, width: sizeConfig.navIconSize, height: sizeConfig.navIconSize }}
+              />
             </Button>
           </div>
           <div className="col-start-3 row-start-2">
@@ -85,7 +108,10 @@ function App() {
               disabled={isDisabled}
             >
               {renderRipple("right")}
-              <ArrowRight className="size-8 relative z-10" style={iconStyle} />
+              <ArrowRight
+                className="relative z-10"
+                style={{ ...iconStyle, width: sizeConfig.navIconSize, height: sizeConfig.navIconSize }}
+              />
             </Button>
           </div>
 
@@ -99,7 +125,10 @@ function App() {
               disabled={isDisabled}
             >
               {renderRipple("down")}
-              <ArrowDown className="size-8 relative z-10" style={iconStyle} />
+              <ArrowDown
+                className="relative z-10"
+                style={{ ...iconStyle, width: sizeConfig.navIconSize, height: sizeConfig.navIconSize }}
+              />
             </Button>
           </div>
         </div>
@@ -107,10 +136,18 @@ function App() {
 
       {/* Zoom Control Panel */}
       <div
-        className="bg-zinc-900/60 backdrop-blur-sm rounded-2xl p-5 w-[128px] h-[248px]"
-        style={panelStyle}
+        className="bg-zinc-900/60 backdrop-blur-sm rounded-2xl"
+        style={{
+          ...panelStyle,
+          width: `${sizeConfig.zoomPanelWidth}px`,
+          height: `${sizeConfig.zoomPanelHeight}px`,
+          padding: `${sizeConfig.padding}px`,
+        }}
       >
-        <div className="flex flex-col gap-2 h-full w-full">
+        <div
+          className="flex flex-col h-full w-full"
+          style={{ gap: `${sizeConfig.gap}px` }}
+        >
           <Button
             variant="ghost"
             size="icon"
@@ -119,7 +156,10 @@ function App() {
             disabled={isDisabled}
           >
             {renderRipple("zoomIn")}
-            <ZoomIn className="size-10 relative z-10" style={iconStyle} />
+            <ZoomIn
+              className="relative z-10"
+              style={{ ...iconStyle, width: sizeConfig.zoomIconSize, height: sizeConfig.zoomIconSize }}
+            />
           </Button>
           <Button
             variant="ghost"
@@ -129,7 +169,10 @@ function App() {
             disabled={isDisabled}
           >
             {renderRipple("zoomOut")}
-            <ZoomOut className="size-10 relative z-10" style={iconStyle} />
+            <ZoomOut
+              className="relative z-10"
+              style={{ ...iconStyle, width: sizeConfig.zoomIconSize, height: sizeConfig.zoomIconSize }}
+            />
           </Button>
         </div>
       </div>
