@@ -1,6 +1,6 @@
 id: reearth-visualizer-plugin-navigation-panel
 name: Visualizer plugin navigation panel
-version: 0.0.1
+version: 1.0.0
 extensions:
   - id: navigation_panel
     type: widget
