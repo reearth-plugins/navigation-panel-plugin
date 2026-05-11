@@ -57,13 +57,24 @@ const moveCamera = (direction: "forward" | "backward" | "left" | "right") => {
   const viewport = reearth.camera.viewport;
   if (!current?.lat || !current?.lng || !current?.height || !viewport) return;
 
-  // Calculate half of visible screen area
+  // Calculate visible screen area
   const viewportHeight = viewport.north - viewport.south;
-  const viewportWidth = viewport.east - viewport.west;
-  const moveDistance =
+  let viewportWidth = viewport.east - viewport.west;
+
+  // Handle dateline crossing: if width is negative, add 360 to get the correct span
+  if (viewportWidth < 0) {
+    viewportWidth += 360;
+  }
+
+  const viewportDimension =
     direction === "forward" || direction === "backward"
-      ? viewportHeight / 3
-      : viewportWidth / 3;
+      ? viewportHeight
+      : viewportWidth;
+
+  // At normal altitudes: move 1/3 of viewport
+  // At high altitudes: cap at 30 degrees to ensure previous view stays in sight
+  const MAX_MOVEMENT_DEGREES = 30;
+  const moveDistance = Math.min(viewportDimension / 3, MAX_MOVEMENT_DEGREES);
 
   // Get camera heading (rotation angle in radians, 0 = north, π/2 = east)
   const heading = current.heading ?? 0;
